@@ -1,15 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 
 export default class Show extends React.Component {
-  static navigationOptions = {
-    title: 'Show'
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('title', '')
+    }
   }
+
+  // this.props.navigation.getParam('url')
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Show coming soon!</Text>
+        <Button
+          title="Show coming soon!"
+          onPress={() => this.props.navigation.navigate('Schedule')}
+        />
       </View>
     )
   }

@@ -44,6 +44,6 @@ export default createBottomTabNavigator(
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray'
     },
-    initialRouteName: 'Stream'
+    initialRouteName: 'Schedule'
   }
 )

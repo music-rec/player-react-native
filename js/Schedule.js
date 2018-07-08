@@ -40,7 +40,12 @@ class ScheduleList extends React.PureComponent {
     <TouchableHighlight
       key={index}
       style={styles.item}
-      onPress={() => this.props.navigation.navigate('Show', { url: item.url })}
+      onPress={() =>
+        this.props.navigation.navigate('Show', {
+          url: item.url,
+          title: item.name
+        })
+      }
     >
       <View>
         <Text>{item.name}</Text>
@@ -112,7 +117,7 @@ class ScheduleList extends React.PureComponent {
 
 export default class Schedule extends React.Component {
   static navigationOptions = {
-    title: 'Schedule'
+    title: 'WCBN Schedule'
   }
   render() {
     return (
