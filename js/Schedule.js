@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button, SectionList } from 'react-native'
 import { Constants } from 'expo'
+import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 
 const WEEEKDAYS = [
   'Monday',
@@ -12,11 +13,14 @@ const WEEEKDAYS = [
   'Sunday'
 ]
 
-const TODAY = new Date().getDay()
+const weekdayIndex = new Date().getDay()
+const TODAY = weekdayIndex == 0 ? 6 : weekdayIndex - 1
 
-const ITEM_HEIGHT = 50
+ITEM_HEIGHT = 50
+HEADER_HEIGHT = 22
 
-class ScheduleList extends React.Component {
+//pure component for better performance
+class ScheduleList extends React.PureComponent {
   constructor() {
     super()
 
@@ -26,16 +30,21 @@ class ScheduleList extends React.Component {
   }
 
   renderItem = ({ item, index, section }) => (
-    <View style={styles.item}>
-      <Text key={index}>{item.name}</Text>
+    <View key={index} style={styles.item}>
+      <Text>{item.name}</Text>
+      <Text style={{ fontStyle: 'italic' }}>{item.with}</Text>
     </View>
   )
 
   renderSectionHeader = ({ section: { title } }) => (
     <View style={styles.header}>
-      <Text style={{ fontWeight: 'bold' }}>{title}</Text>
+      <Text style={{ fontWeight: 'bold', color: 'whitesmoke' }}>{title}</Text>
     </View>
   )
+
+  itemSeparator() {
+    return <View style={styles.separator} />
+  }
 
   componentDidMount() {
     this.fetchSchedule()
@@ -59,18 +68,18 @@ class ScheduleList extends React.Component {
       })
       .then(() => {
         this.sectionListRef.scrollToLocation({
+          animated: true,
           sectionIndex: TODAY,
           itemIndex: 0,
           viewPosition: 0
         })
       })
-      .then(response => console.log('fetched schedule'))
   }
 
-  getItemLayout = (data, index) => ({
-    length: ITEM_HEIGHT,
-    offset: ITEM_HEIGHT * index,
-    index
+  getItemLayout = sectionListGetItemLayout({
+    getItemHeight: (rowData, sectionIndex, rowIndex) => ITEM_HEIGHT,
+    getSectionHeaderHeight: () => HEADER_HEIGHT
+    // listHeaderHeight: 40, // TODO height of the list header
   })
 
   render() {
@@ -95,7 +104,7 @@ export default class Schedule extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScheduleList url="https://app.wcbn.org/semesters/9.json/" />
+        <ScheduleList url="https://app.wcbn.org/semesters/10.json/" />
       </View>
     )
   }
@@ -104,18 +113,23 @@ export default class Schedule extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 0,
+    marginTop: Constants.statusBarHeight,
     backgroundColor: 'whitesmoke'
   },
   sectionList: {
-    flex: 1,
-    padding: 10
+    flex: 1
   },
   header: {
-    height: ITEM_HEIGHT,
-    backgroundColor: 'whitesmoke'
+    height: HEADER_HEIGHT,
+    paddingLeft: 10,
+    backgroundColor: 'black'
   },
   item: {
-    height: ITEM_HEIGHT
+    height: ITEM_HEIGHT,
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth
   }
 })
