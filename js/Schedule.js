@@ -1,5 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, SectionList } from 'react-native'
+import {
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  View,
+  Button,
+  SectionList
+} from 'react-native'
 import { Constants } from 'expo'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
 
@@ -30,10 +37,16 @@ class ScheduleList extends React.PureComponent {
   }
 
   renderItem = ({ item, index, section }) => (
-    <View key={index} style={styles.item}>
-      <Text>{item.name}</Text>
-      <Text style={{ fontStyle: 'italic' }}>{item.with}</Text>
-    </View>
+    <TouchableHighlight
+      key={index}
+      style={styles.item}
+      onPress={() => this.props.navigation.navigate('Show', { url: item.url })}
+    >
+      <View>
+        <Text>{item.name}</Text>
+        <Text style={{ fontStyle: 'italic' }}>{item.with}</Text>
+      </View>
+    </TouchableHighlight>
   )
 
   renderSectionHeader = ({ section: { title } }) => (
@@ -104,7 +117,10 @@ export default class Schedule extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScheduleList url="https://app.wcbn.org/semesters/10.json/" />
+        <ScheduleList
+          url="https://app.wcbn.org/semesters/10.json/"
+          navigation={this.props.navigation}
+        />
       </View>
     )
   }
@@ -113,7 +129,6 @@ export default class Schedule extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
     backgroundColor: 'whitesmoke'
   },
   sectionList: {

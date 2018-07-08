@@ -8,10 +8,16 @@ import Schedule from './Schedule'
 import Stream from './Stream'
 import Favorites from './Favorites'
 import Settings from './Settings'
+import Show from './Show'
+
+const ScheduleStack = createStackNavigator({
+  Schedule: { screen: Schedule },
+  Show: { screen: Show }
+})
 
 export default createBottomTabNavigator(
   {
-    Schedule: Schedule,
+    Schedule: ScheduleStack,
     Stream: Stream,
     Favorites: Favorites,
     Settings: Settings
@@ -31,8 +37,6 @@ export default createBottomTabNavigator(
           iconName = `ios-settings${focused ? '' : '-outline'}`
         }
 
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
         return <Ionicons name={iconName} size={25} color={tintColor} />
       }
     }),
