@@ -58,7 +58,8 @@ export default class Stream extends React.Component {
   }
 
   componentDidMount() {
-    Settings.getStreamSetting().then(resp => console.log(resp))
+    // Settings.getStreamSetting().then(resp => console.log(resp))
+    // console.log(Settings.state.selectedStreamIndex)
   }
 
   render() {

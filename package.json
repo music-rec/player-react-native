@@ -24,6 +24,7 @@
     "react-native": "~0.55.2",
     "react-native-audio-toolkit": "^1.0.6",
     "react-native-section-list-get-item-layout": "^2.2.3",
+    "react-native-segmented-control-tab": "^3.2.2",
     "react-navigation": "^2.6.2"
   },
   "prettier": {
