@@ -41,7 +41,7 @@ export default class Settings extends React.Component {
       <View style={styles.container}>
         <Text>Stream Quality</Text>
         <SegmentedControlTab
-          values={['Low', 'Med', 'High']}
+          values={['Low', 'Medium', 'High']}
           selectedIndex={this.state.selectedStreamIndex}
           onTabPress={this.setStreamSetting}
         />
