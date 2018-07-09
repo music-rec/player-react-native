@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit'
+import Settings from './Settings'
 
 async function play(remoteURL) {
   player = new Player(remoteURL, {
@@ -54,6 +55,10 @@ export default class Stream extends React.Component {
     //     })
     //   }
     // })
+  }
+
+  componentDidMount() {
+    Settings.getStreamSetting().then(resp => console.log(resp))
   }
 
   render() {
