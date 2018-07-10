@@ -31,11 +31,6 @@ export default class Settings extends React.Component {
     // AsyncStorage.getItem('STREAM_URL').then(resp => console.log(resp))
   }
 
-  static async getStreamSetting() {
-    const result = await AsyncStorage.getItem('STREAM_URL')
-    return result || 'http://floyd.wcbn.org:8000/wcbn-mid.mp3'
-  }
-
   render() {
     return (
       <View style={styles.container}>

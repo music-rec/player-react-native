@@ -9,10 +9,12 @@ import Stream from './Stream'
 import Favorites from './Favorites'
 import Settings from './Settings'
 import Show from './Show'
+import Profile from './Profile'
 
 const ScheduleStack = createStackNavigator({
   Schedule: { screen: Schedule },
-  Show: { screen: Show }
+  Show: { screen: Show },
+  Profile: { screen: Profile }
 })
 
 export default createBottomTabNavigator(
@@ -44,6 +46,6 @@ export default createBottomTabNavigator(
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray'
     },
-    initialRouteName: 'Stream'
+    initialRouteName: 'Schedule'
   }
 )

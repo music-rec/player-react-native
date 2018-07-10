@@ -1,10 +1,9 @@
 import React from 'react'
 import {
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
   Text,
   View,
-  Button,
   SectionList
 } from 'react-native'
 import { Constants } from 'expo'
@@ -37,7 +36,7 @@ class ScheduleList extends React.PureComponent {
   }
 
   renderItem = ({ item, index, section }) => (
-    <TouchableHighlight
+    <TouchableOpacity
       key={index}
       style={styles.item}
       onPress={() =>
@@ -51,18 +50,22 @@ class ScheduleList extends React.PureComponent {
         <Text>{item.name}</Text>
         <Text style={{ fontStyle: 'italic' }}>{item.with}</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   )
 
   renderSectionHeader = ({ section: { title } }) => (
     <View style={styles.header}>
-      <Text style={{ fontWeight: 'bold', color: 'whitesmoke' }}>{title}</Text>
+      <Text
+        style={{
+          fontWeight: 'bold',
+          color: 'whitesmoke',
+          lineHeight: HEADER_HEIGHT
+        }}
+      >
+        {title}
+      </Text>
     </View>
   )
-
-  itemSeparator() {
-    return <View style={styles.separator} />
-  }
 
   componentDidMount() {
     this.fetchSchedule()
