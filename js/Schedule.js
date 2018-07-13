@@ -72,7 +72,12 @@ class ScheduleList extends React.PureComponent {
   }
 
   fetchSchedule() {
-    fetch(this.props.url)
+    fetch(this.props.url, {
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      })
+    })
       .then(response => response.json())
       .then(response => response['shows'])
       .then(response => {
@@ -126,7 +131,7 @@ export default class Schedule extends React.Component {
     return (
       <View style={styles.container}>
         <ScheduleList
-          url="https://app.wcbn.org/semesters/10.json/"
+          url="https://app.wcbn.org/semesters"
           navigation={this.props.navigation}
         />
       </View>
