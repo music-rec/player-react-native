@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
 export default class Profile extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -8,10 +8,41 @@ export default class Profile extends React.Component {
     }
   }
 
+  constructor() {
+    super()
+    this.state = {
+      data: {}
+    }
+  }
+
+  componentDidMount() {
+    this.fetchDJ()
+  }
+
+  fetchDJ() {
+    fetch(
+      'https://app.wcbn.org' + this.props.navigation.getParam('url') + '.json'
+    )
+      .then(response => response.json())
+      .then(response =>
+        this.setState({
+          data: response
+        })
+      )
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>profile coming soon!</Text>
+        <View style={styles.banner}>
+          <Image
+            style={{ width: 66, height: 66 }}
+            source={{ uri: this.state.data.image_url }}
+          />
+        </View>
+        <View style={styles.about}>
+          <Text>{this.state.data.about}</Text>
+        </View>
       </View>
     )
   }
@@ -19,12 +50,16 @@ export default class Profile extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'whitesmoke',
-    height: 300
+    flex: 1,
+    backgroundColor: 'whitesmoke'
+  },
+  banner: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#7f8c8d'
+  },
+  about: {
+    padding: 20
   }
 })
