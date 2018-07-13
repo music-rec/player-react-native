@@ -40,9 +40,10 @@ export default class Show extends React.Component {
           description: response.description,
           djs: response.djs,
           episodes: response.episodes.reduceRight((acc, e) => {
-            if (e.songs.length) {
-              var day = new Date(e.beginning)
-              e.beginning = day.toLocaleDateString('en-US', options)
+            let today = new Date()
+            let episodeDate = new Date(e.beginning)
+            if (episodeDate < today) {
+              e.beginning = episodeDate.toLocaleDateString('en-US', options)
               acc.push(e)
             }
             return acc
@@ -81,13 +82,19 @@ export default class Show extends React.Component {
   }
 
   renderEpisode({ item, index }) {
-    return (
+    //TODO refactor this
+    return item.songs.length ? (
       <TouchableOpacity>
         <View style={styles.episode}>
           <Text style={styles.episodeText}>{item.beginning}</Text>
           <Text style={styles.episodeText}>{item.songs.length} Songs</Text>
         </View>
       </TouchableOpacity>
+    ) : (
+      <View style={styles.episode}>
+        <Text style={styles.episodeText}>{item.beginning}</Text>
+        <Text style={styles.episodeText}>{item.songs.length} Songs</Text>
+      </View>
     )
   }
 
