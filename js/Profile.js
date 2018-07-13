@@ -10,9 +10,7 @@ export default class Profile extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      data: {}
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -24,11 +22,7 @@ export default class Profile extends React.Component {
       'https://app.wcbn.org' + this.props.navigation.getParam('url') + '.json'
     )
       .then(response => response.json())
-      .then(response =>
-        this.setState({
-          data: response
-        })
-      )
+      .then(response => this.setState(response))
   }
 
   render() {
@@ -37,11 +31,11 @@ export default class Profile extends React.Component {
         <View style={styles.banner}>
           <Image
             style={{ width: 66, height: 66 }}
-            source={{ uri: this.state.data.image_url }}
+            source={{ uri: this.state.image_url }}
           />
         </View>
         <View style={styles.about}>
-          <Text>{this.state.data.about}</Text>
+          <Text>{this.state.about}</Text>
         </View>
       </View>
     )
