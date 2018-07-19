@@ -10,11 +10,13 @@ import Favorites from './Favorites'
 import Settings from './Settings'
 import Show from './Show'
 import Profile from './Profile'
+import Episode from './Episode'
 
 const ScheduleStack = createStackNavigator({
-  Schedule: { screen: Schedule },
-  Show: { screen: Show },
-  Profile: { screen: Profile }
+  Schedule: Schedule,
+  Show: Show,
+  Profile: Profile,
+  Episode: Episode
 })
 
 export default createBottomTabNavigator(
@@ -30,14 +32,35 @@ export default createBottomTabNavigator(
         const { routeName } = navigation.state
         let iconName
         if (routeName === 'Schedule') {
-          iconName = `ios-calendar${focused ? '' : '-outline'}`
+          iconName = 'calendar'
         } else if (routeName === 'Stream') {
-          iconName = `ios-musical-notes${focused ? '' : '-outline'}`
+          iconName = 'musical-notes'
         } else if (routeName === 'Favorites') {
-          iconName = `ios-heart${focused ? '' : '-outline'}`
+          iconName = 'heart'
         } else if (routeName === 'Settings') {
-          iconName = `ios-settings${focused ? '' : '-outline'}`
+          iconName = 'settings'
         }
+        iconName = `ios-${iconName}${focused ? '' : '-outline'}`
+
+        //this does this same thing but i can't decide what i like more
+        // switch (routeName) {
+        //   case 'Schedule':
+        //     iconName = 'calendar'
+        //     break
+        //   case 'Stream':
+        //     iconName = 'musical-notes'
+        //     break
+        //   case 'Favorites':
+        //     iconName = 'heart'
+        //     break
+        //   case 'Settings':
+        //     iconName = 'settings'
+        //     break
+        //   default:
+        //     console.log('Icon not found')
+        // }
+        //
+        // iconName = `ios-${iconName}${focused ? '' : '-outline'}`
 
         return <Ionicons name={iconName} size={25} color={tintColor} />
       }
