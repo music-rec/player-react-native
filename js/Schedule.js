@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import {
   StyleSheet,
@@ -22,10 +24,10 @@ const WEEEKDAYS = [
 const weekdayIndex = new Date().getDay()
 const TODAY = weekdayIndex == 0 ? 6 : weekdayIndex - 1
 
-ITEM_HEIGHT = 50
-HEADER_HEIGHT = 22
+const ITEM_HEIGHT = 50
+const HEADER_HEIGHT = 22
 
-//pure component for better performance
+//pure component for better performance(?)
 class ScheduleList extends React.PureComponent {
   constructor() {
     super()
@@ -105,7 +107,6 @@ class ScheduleList extends React.PureComponent {
   getItemLayout = sectionListGetItemLayout({
     getItemHeight: (rowData, sectionIndex, rowIndex) => ITEM_HEIGHT,
     getSectionHeaderHeight: () => HEADER_HEIGHT
-    // listHeaderHeight: 40, // TODO height of the list header
   })
 
   render() {
@@ -142,7 +143,7 @@ export default class Schedule extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'whitesmoke'
+    backgroundColor: 'whitesmoke' //#e67e22
   },
   sectionList: {
     flex: 1

@@ -2,4 +2,4 @@
  * @flow models
  */
 
-export * from './Song'
+export * from './SongT'

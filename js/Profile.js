@@ -35,7 +35,7 @@ export default class Profile extends React.Component {
           />
         </View>
         <View style={styles.about}>
-          <Text>{this.state.about}</Text>
+          <Text>{this.state.about || 'This DJ does not have a bio'}</Text>
         </View>
       </View>
     )

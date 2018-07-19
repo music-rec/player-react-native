@@ -1,3 +1,7 @@
+/*
+ * @flow
+ */
+
 import React from 'react'
 import {
   StyleSheet,
@@ -84,7 +88,14 @@ export default class Show extends React.Component {
   renderEpisode({ item, index }) {
     //TODO refactor this
     return item.songs.length ? (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate('Episode', {
+            songs: item.songs,
+            title: item.beginning
+          })
+        }
+      >
         <View style={styles.episode}>
           <Text style={styles.episodeText}>{item.beginning}</Text>
           <Text style={styles.episodeText}>{item.songs.length} Songs</Text>
@@ -112,7 +123,7 @@ export default class Show extends React.Component {
 
         <FlatList
           data={this.state.episodes}
-          renderItem={this.renderEpisode}
+          renderItem={this.renderEpisode.bind(this)}
           keyExtractor={item => item.beginning}
         />
       </View>

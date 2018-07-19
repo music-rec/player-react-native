@@ -3,7 +3,7 @@
  * @flow
  */
 
-export type Song = {
+export type SongT = {
   +id: ?number,
   +name: string,
   +artist: string,
@@ -16,7 +16,7 @@ export type Song = {
   +at: Date
 }
 
-export const defaultSong: Song = {
+export const defaultSongT: SongT = {
   id: null,
   name: '',
   artist: '',
