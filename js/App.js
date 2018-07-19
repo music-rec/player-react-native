@@ -42,26 +42,6 @@ export default createBottomTabNavigator(
         }
         iconName = `ios-${iconName}${focused ? '' : '-outline'}`
 
-        //this does this same thing but i can't decide what i like more
-        // switch (routeName) {
-        //   case 'Schedule':
-        //     iconName = 'calendar'
-        //     break
-        //   case 'Stream':
-        //     iconName = 'musical-notes'
-        //     break
-        //   case 'Favorites':
-        //     iconName = 'heart'
-        //     break
-        //   case 'Settings':
-        //     iconName = 'settings'
-        //     break
-        //   default:
-        //     console.log('Icon not found')
-        // }
-        //
-        // iconName = `ios-${iconName}${focused ? '' : '-outline'}`
-
         return <Ionicons name={iconName} size={25} color={tintColor} />
       }
     }),
