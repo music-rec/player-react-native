@@ -1,3 +1,7 @@
+/*
+ * @flow
+ */
+
 import React from 'react'
 import {
   createBottomTabNavigator,
@@ -30,7 +34,7 @@ export default createBottomTabNavigator(
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
-        let iconName
+        let iconName = ''
         if (routeName === 'Schedule') {
           iconName = 'calendar'
         } else if (routeName === 'Stream') {
