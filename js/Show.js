@@ -1,7 +1,3 @@
-/*
- * @flow
- */
-
 import React from 'react'
 import {
   StyleSheet,
@@ -33,7 +29,7 @@ export default class Show extends React.Component {
   }
 
   fetchShow() {
-    const options = { month: 'long', day: 'numeric', year: 'numeric' } //weekday: 'long', ,
+    const options = { month: 'long', day: 'numeric', year: 'numeric' }
 
     fetch(
       'https://app.wcbn.org' + this.props.navigation.getParam('url') + '.json'
@@ -43,11 +39,20 @@ export default class Show extends React.Component {
         this.setState({
           description: response.description,
           djs: response.djs,
-          episodes: response.episodes.reduceRight((acc, e) => {
+          episodes: response.episodes.reduce((acc, e) => {
             let today = new Date()
             let episodeDate = new Date(e.beginning)
             if (episodeDate < today) {
               e.beginning = episodeDate.toLocaleDateString('en-US', options)
+
+              e.songs.forEach(song => {
+                let day = new Date(song.at)
+                song.at = day.toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })
+              })
+
               acc.push(e)
             }
             return acc
@@ -92,7 +97,9 @@ export default class Show extends React.Component {
         onPress={() =>
           this.props.navigation.navigate('Episode', {
             songs: item.songs,
-            title: item.beginning
+            title: item.beginning,
+            dj: item.dj,
+            dj_url: item.dj_url
           })
         }
       >
