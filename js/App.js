@@ -1,6 +1,4 @@
-/*
- * @flow
- */
+//@flow
 
 import React from 'react'
 import {
@@ -15,6 +13,7 @@ import Settings from './Settings'
 import Show from './Show'
 import Profile from './Profile'
 import Episode from './Episode'
+import Playlist from './Playlist'
 
 const ScheduleStack = createStackNavigator({
   Schedule: Schedule,
@@ -23,9 +22,15 @@ const ScheduleStack = createStackNavigator({
   Episode: Episode
 })
 
+const PlaylistStack = createStackNavigator({
+  Playlist: Playlist,
+  Profile: Profile
+})
+
 export default createBottomTabNavigator(
   {
     Schedule: ScheduleStack,
+    Playlist: PlaylistStack,
     Stream: Stream,
     Favorites: Favorites,
     Settings: Settings
@@ -37,8 +42,10 @@ export default createBottomTabNavigator(
         let iconName = ''
         if (routeName === 'Schedule') {
           iconName = 'calendar'
-        } else if (routeName === 'Stream') {
+        } else if (routeName === 'Playlist') {
           iconName = 'musical-notes'
+        } else if (routeName === 'Stream') {
+          iconName = 'radio'
         } else if (routeName === 'Favorites') {
           iconName = 'heart'
         } else if (routeName === 'Settings') {
@@ -53,6 +60,6 @@ export default createBottomTabNavigator(
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray'
     },
-    initialRouteName: 'Schedule'
+    initialRouteName: 'Playlist'
   }
 )
